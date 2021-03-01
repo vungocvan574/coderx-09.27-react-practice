@@ -1,26 +1,19 @@
 import React from 'react';
 
-import "./index.css";
-import AwesomeImage from "./AwesomeImage";
+// import "./index.css";
 
-// import HoverOpacity from "./HoverOpacity"
+import List from './components/List'
+import Counter from './components/Counter'
 
-import withHoverOpacity from './withHoverOpacity';
-import withGrayscale from './withGrayscale';
-
-const src="https://picsum.photos/200/300"
-const HoverOpacityAwesomeImage = withHoverOpacity(AwesomeImage, 0.9);
-const GrayscaleAwesomeImage = withGrayscale(src, 300, 200, 0.5);
+const data = ["A", "B", "C"];
 
 function App() {
   return (
     <div className="App">
-        {/* <HoverOpacity>
-          <AwesomeImage src="https://picsum.photos/200/300"></AwesomeImage>
-        </HoverOpacity> */}
-        <HoverOpacityAwesomeImage src="https://picsum.photos/200/300"/>
-        <br></br>
-        <GrayscaleAwesomeImage src="https://picsum.photos/200/300"/>
+      <List data = {data} render = {(item) => <div>{item}</div>}  />
+      <List data = {data} render = {(item) => <div>- {item}</div>}  />
+      <List data = {data} render = {(item) => <div>+ {item}</div>}  />
+      <Counter />
     </div>
   );
 }
