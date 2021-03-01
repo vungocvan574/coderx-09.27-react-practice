@@ -1,37 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-import TopMenu from './components/TopMenu'
+import "./index.css";
+import AwesomeImage from "./AwesomeImage";
 
-import Products from './pages/Products'
+// import HoverOpacity from "./HoverOpacity"
 
+import withHoverOpacity from './withHoverOpacity';
+import withGrayscale from './withGrayscale';
 
-
+const src="https://picsum.photos/200/300"
+const HoverOpacityAwesomeImage = withHoverOpacity(AwesomeImage, 0.9);
+const GrayscaleAwesomeImage = withGrayscale(src, 300, 200, 0.5);
 
 function App() {
   return (
-    <Router>
-      <div className="container">
-        <TopMenu />
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/products">
-            <Products />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div className="App">
+        {/* <HoverOpacity>
+          <AwesomeImage src="https://picsum.photos/200/300"></AwesomeImage>
+        </HoverOpacity> */}
+        <HoverOpacityAwesomeImage src="https://picsum.photos/200/300"/>
+        <br></br>
+        <GrayscaleAwesomeImage src="https://picsum.photos/200/300"/>
+    </div>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
 }
 
 export default App;
