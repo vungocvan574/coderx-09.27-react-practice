@@ -1,20 +1,27 @@
-import React from 'react';
+import React from "react";
 
-// import "./index.css";
+import Counter from "./components/Counter";
 
-import List from './components/List'
-import Counter from './components/Counter'
-
-const data = ["A", "B", "C"];
+import NumberProvider from "./components/NumberProvider";
+import NumberContext from "./contexts/NumberContext";
 
 function App() {
   return (
-    <div className="App">
-      <List data = {data} render = {(item) => <div>{item}</div>}  />
-      <List data = {data} render = {(item) => <div>- {item}</div>}  />
-      <List data = {data} render = {(item) => <div>+ {item}</div>}  />
-      <Counter />
-    </div>
+    <NumberProvider>
+      <div className="App">
+        <NumberContext.Consumer>
+          {({ number, updateNumber }) => (
+            <div>
+              <h2>{number}</h2>
+              <button onClick={updateNumber}>Update Number</button>
+            </div>
+          )}
+        </NumberContext.Consumer>
+        {/* <List data={data} render={(item) => <div>- {item}</div>} /> */}
+        {/* <List data={data} render={(item) => <div>+ {item}</div>} /> */}
+        <Counter>{({ count }) => <h1>{count}</h1>}</Counter>
+      </div>
+    </NumberProvider>
   );
 }
 
