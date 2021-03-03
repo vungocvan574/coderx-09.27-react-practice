@@ -1,29 +1,34 @@
 import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default class Counter extends Component {
+export default class TimerCounter extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            count:0
+            value:0
         };
+
+        this.increase=this.increase.bind(this);
     }
 
-    componentDidMount() {
-        this.timerId = setInterval(() => {
-            this.setState ({
-                count: this.state.count + 1
-            });
-        },1000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timerId);
+    increase() {
+        this.setState(state => {
+            return{
+                value: state.value + 1
+            }
+        })
+        this.setState(state => {
+            return{
+                value: state.value + 1
+            }
+        })
     }
 
     render() {
         return <div>
-            {this.props.children(this.state.count)}
+            <h2>{this.state.value}</h2>
+            <button className="btn btn-primary" onClick={this.increase}>Increase</button>
         </div>
     }
 }
