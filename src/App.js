@@ -1,27 +1,38 @@
 import React from "react";
 
-import Counter from "./components/Counter";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import NumberProvider from "./components/NumberProvider";
-import NumberContext from "./contexts/NumberContext";
+import TopMenu from "./components/TopMenu";
+
+import Products from "./pages/Products";
+
+import { CartProvider } from "./contexts/Cart";
+
+function Home() {
+  return <h2>Home</h2>;
+}
 
 function App() {
   return (
-    <NumberProvider>
-      <div className="App">
-        <NumberContext.Consumer>
-          {({ number, updateNumber }) => (
-            <div>
-              <h2>{number}</h2>
-              <button onClick={updateNumber}>Update Number</button>
-            </div>
-          )}
-        </NumberContext.Consumer>
-        {/* <List data={data} render={(item) => <div>- {item}</div>} /> */}
-        {/* <List data={data} render={(item) => <div>+ {item}</div>} /> */}
-        <Counter>{({ count }) => <h1>{count}</h1>}</Counter>
-      </div>
-    </NumberProvider>
+    <CartProvider>
+      <Router>
+        <div className="container">
+          <TopMenu />
+
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/products">
+              <Products />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
 
